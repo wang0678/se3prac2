@@ -1,0 +1,61 @@
+This module began failing tests at commit 5801013.
+
+The last known good commit is 77eb19e.
+
+test output for commit 77eb19e is:    
+ 
+
+connect() to port failed: Connection refused
+Port 57649 is available for use by student programme.
+connect() to port failed: Connection refused
+SUCCESS: Accepts connections on specified TCP port
+FAIL: Accepting multiple connections on a TCP port. Did not complete 1,000 connections in less than 5 minutes.
+SUCCESS: Accepted 1,000 connections in less than a minute.
+SUCCESS: HTTP request 'GET / HTTP/1.0\r\n\r\n' returned HTTP response code 200
+SUCCESS: HTTP request 'GET / HTTP/1.0\r\r' returned HTTP response code 200
+
+The HTTP request does not end in two carriage returns. Waiting for timeout...
+SUCCESS: HTTP request 'GET / HTTP/1.0' returned nothing, a dropped connection or HTTP request timeout indication.
+
+The HTTP request does not end in two carriage returns. Waiting for timeout...
+SUCCESS: HTTP request 'GET / HTTP/1.0\r\n' returned nothing, a dropped connection or HTTP request timeout indication.
+
+The client has requested FTP. Sending error.
+SUCCESS: HTTP request 'GET / FTP/1.0\r\n\r\n' correctly reported an HTTP error
+
+The client has requested the wrong version of HTTP. Sending error.
+SUCCESS: HTTP request 'GET / HTTP/1.1\r\n\r\n' correctly reported an HTTP error
+
+The client has requested a page. Reporting a 404 error.
+
+The page request does not end in two carriage returns. Waiting for timeout...
+SUCCESS: HTTP request 'GET /this_page_should_not_exist HTTP/1.0\r\n\r\n' returned HTTP response code 404
+SUCCESS: Response includes valid and correct content-length field
+SUCCESS: Makes outbound TCP connection on specified port.
+SUCCESS: Wrote to outbound TCP connection.
+SUCCESS: Wrote a valid HTTP request to outbound TCP connection.
+SUCCESS: Wrote valid HTTP request to /gettoken to retrieve token.
+SUCCESS: Did write response for token challenge request.
+SUCCESS: Did return an HTTP error code 5xx when token fetching fails.
+SUCCESS: Makes outbound TCP connection on specified port.
+SUCCESS: Wrote to outbound TCP connection.
+SUCCESS: Wrote a valid HTTP request to outbound TCP connection.
+SUCCESS: Wrote valid HTTP request to /gettoken to retrieve token.
+SUCCESS: Did write response for token challenge request.
+SUCCESS: Returned a HTTP 200 OK response to token challenge request.
+SUCCESS: Returned a valid HTTP body and/or content-length header to token challenge request.
+SUCCESS: Returned token from token challenge request.
+Passed 24 of 25 tests.
+Score for functional aspects of assignment 1 will be 80%.
+Score for style (0% -- 16%) will be assessed manually.
+Therefore your grade for this assignment will be in the range 80% -- 96% (DN -- HD)
+About to kill student process 24882
+Seeing how that went.
+
+As can be observed, 24 of 25 tests pass (the 25 test is not applicable to this practical exercise).
+
+In contrast, for commit 5801013, the program does not even compile:
+
+~/2014SE3 {wang0678} [210] :gcc -Wall -g -o mutated pracs/prac2/students/2/mutated.c -lnsl -lsocket
+pracs/prac2/students/2/mutated.c:47:1: error: expected identifier or '(' before '{' token
+ {
